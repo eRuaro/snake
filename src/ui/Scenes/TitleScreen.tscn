@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/ui/Scenes/TitleScreen.gd" type="Script" id=1]
+[ext_resource path="res://src/ui/Buttons/PlayButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/ui/SceneTransitions/FadeIn.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/ui/Buttons/ExitButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/ui/Textures/TitleLabel.png" type="Texture" id=5]
+[ext_resource path="res://src/ui/Textures/Snake1.png" type="Texture" id=6]
+
+[node name="TitleScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="VBoxContainer" parent="."]
+margin_left = 120.0
+margin_top = 50.0
+margin_right = 1160.0
+margin_bottom = 640.0
+rect_pivot_offset = Vector2( 1308.95, 209.357 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleLogo" type="TextureRect" parent="Menu"]
+margin_right = 1040.0
+margin_bottom = 175.0
+texture = ExtResource( 5 )
+stretch_mode = 4
+
+[node name="CenterRow" type="HBoxContainer" parent="Menu"]
+margin_top = 179.0
+margin_right = 1040.0
+margin_bottom = 590.0
+size_flags_vertical = 3
+
+[node name="SnakeContainer" type="HBoxContainer" parent="Menu/CenterRow"]
+margin_right = 319.0
+margin_bottom = 411.0
+
+[node name="TextureRect" type="TextureRect" parent="Menu/CenterRow/SnakeContainer"]
+margin_right = 319.0
+margin_bottom = 411.0
+texture = ExtResource( 6 )
+
+[node name="ButtonHolder" type="HBoxContainer" parent="Menu/CenterRow"]
+margin_left = 323.0
+margin_right = 1040.0
+margin_bottom = 411.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Buttons" type="VBoxContainer" parent="Menu/CenterRow/ButtonHolder"]
+margin_right = 717.0
+margin_bottom = 411.0
+rect_pivot_offset = Vector2( -108.097, -184.682 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="PlayButton" parent="Menu/CenterRow/ButtonHolder/Buttons" instance=ExtResource( 2 )]
+margin_top = 53.0
+margin_right = 717.0
+margin_bottom = 203.0
+
+[node name="ExitButton" parent="Menu/CenterRow/ButtonHolder/Buttons" instance=ExtResource( 4 )]
+margin_top = 207.0
+margin_right = 717.0
+margin_bottom = 357.0
+
+[node name="FadeIn" parent="." instance=ExtResource( 3 )]
+visible = false
+rect_pivot_offset = Vector2( 110.421, 204.121 )
+
+[connection signal="pressed" from="Menu/CenterRow/ButtonHolder/Buttons/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="Menu/CenterRow/ButtonHolder/Buttons/ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="fade_finished" from="FadeIn" to="." method="_on_FadeIn_fade_finished"]

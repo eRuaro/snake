@@ -1,0 +1,89 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/ui/SceneTransitions/PauseScreen.gd" type="Script" id=1]
+[ext_resource path="res://src/ui/Buttons/ExitButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/ui/Font/upheavtt.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://src/ui/Buttons/PauseGoButton.tscn" type="PackedScene" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 80
+outline_size = 4
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 3 )
+
+[node name="PauseScreen" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 320.0
+margin_top = 130.0
+margin_right = -320.0
+margin_bottom = -130.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color( 1, 0.988281, 0.988281, 1 )
+light_mask = 2051
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 987.453, 789.469 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.937255, 0.870588, 0.54902, 0.792157 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeftFiller" type="VBoxContainer" parent="CenterContainer"]
+margin_right = 136.0
+margin_bottom = 460.0
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="CenterContainer" parent="CenterContainer"]
+margin_left = 140.0
+margin_right = 500.0
+margin_bottom = 460.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+margin_top = 40.0
+margin_right = 360.0
+margin_bottom = 420.0
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/VBoxContainer"]
+margin_right = 360.0
+margin_bottom = 72.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+text = "Paused"
+align = 1
+
+[node name="GoButton" parent="CenterContainer/VBoxContainer/VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 76.0
+margin_bottom = 226.0
+
+[node name="ExitButton" parent="CenterContainer/VBoxContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 230.0
+margin_bottom = 380.0
+
+[node name="RightFiller" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 504.0
+margin_right = 640.0
+margin_bottom = 460.0
+rect_pivot_offset = Vector2( -418.137, 140.895 )
+size_flags_horizontal = 3
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/VBoxContainer/GoButton" to="." method="_on_GoButton_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/VBoxContainer/ExitButton" to="." method="_on_ExitButton_pressed"]
