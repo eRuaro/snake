@@ -1,0 +1,100 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://src/ui/Buttons/BackButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/GameHolder.gd" type="Script" id=2]
+[ext_resource path="res://src/ui/Font/upheavtt.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://src/ui/SceneTransitions/PauseScreen.tscn" type="PackedScene" id=4]
+
+[sub_resource type="Theme" id=1]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.85098, 0.976471, 0.815686, 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 115
+outline_size = 10
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 30
+font_data = ExtResource( 3 )
+
+[node name="MainGameSceneHolder" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 30.0
+margin_top = 30.0
+margin_right = -30.0
+margin_bottom = -30.0
+rect_pivot_offset = Vector2( 1432.59, 136.242 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeftFiller" type="HBoxContainer" parent="HBoxContainer"]
+margin_right = 856.0
+margin_bottom = 660.0
+size_flags_horizontal = 3
+
+[node name="HoldAll" type="PanelContainer" parent="HBoxContainer"]
+margin_left = 860.0
+margin_right = 1220.0
+margin_bottom = 660.0
+rect_pivot_offset = Vector2( 443.898, -3.76552 )
+theme = SubResource( 1 )
+custom_styles/panel = SubResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/HoldAll"]
+margin_right = 360.0
+margin_bottom = 660.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreHolder" type="Label" parent="HBoxContainer/HoldAll/VBoxContainer"]
+margin_right = 360.0
+margin_bottom = 105.0
+rect_pivot_offset = Vector2( 902.963, -124.296 )
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0.231373, 0.482353, 0.0470588, 1 )
+text = "0"
+align = 1
+
+[node name="VerticalFiller" type="VBoxContainer" parent="HBoxContainer/HoldAll/VBoxContainer"]
+margin_top = 109.0
+margin_right = 360.0
+margin_bottom = 468.0
+size_flags_vertical = 3
+
+[node name="AddButton" type="Button" parent="HBoxContainer/HoldAll/VBoxContainer"]
+margin_top = 472.0
+margin_right = 360.0
+margin_bottom = 506.0
+rect_pivot_offset = Vector2( 218.238, 125.124 )
+custom_fonts/font = SubResource( 4 )
+text = "Add score"
+
+[node name="ExitButton" parent="HBoxContainer/HoldAll/VBoxContainer" instance=ExtResource( 1 )]
+margin_top = 510.0
+margin_bottom = 660.0
+rect_pivot_offset = Vector2( 228.137, -26.0132 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseScreen" parent="CanvasLayer" instance=ExtResource( 4 )]
+visible = false
+
+[connection signal="pressed" from="HBoxContainer/HoldAll/VBoxContainer/AddButton" to="." method="_on_AddButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/HoldAll/VBoxContainer/AddButton" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="HBoxContainer/HoldAll/VBoxContainer/ExitButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/HoldAll/VBoxContainer/ExitButton" to="." method="_on_ExitButton_pressed"]
